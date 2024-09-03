@@ -3,12 +3,14 @@ package ali.saranj.aparat.ui.screen.main
 import ali.saranj.aparat.R
 import ali.saranj.aparat.ui.components.navbottom.BottomNavigationBar
 import ali.saranj.aparat.ui.screen.home.HomeScreen
+import ali.saranj.aparat.ui.screen.home.HomeViewModel
 import ali.saranj.aparat.ui.screen.profile.ProfileScreen
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -56,7 +58,12 @@ fun AppNavHost(
         startDestination = startDestination
     ) {
         composable(BottomNavItem.Home.route) {
-            HomeScreen()
+
+            val homeViewMode = hiltViewModel<HomeViewModel>()
+            val stateListVideo = homeViewMode.homeUiState.value
+            HomeScreen(homeUIEvent = homeViewMode::handleEvent, videoState = stateListVideo)
+
+
         }
         composable(BottomNavItem.Profile.route){
             ProfileScreen()

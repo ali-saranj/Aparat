@@ -50,14 +50,14 @@ val Typography = Typography(
     titleLarge = TextStyle(
         fontFamily = firaSansFamily,
         fontWeight = FontWeight.Bold,
-        fontSize = 20.sp,
+        fontSize = 18.sp,
         lineHeight = 28.sp,
     ),
 
     titleMedium = TextStyle(
         fontFamily = firaSansFamily,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
+        fontWeight = FontWeight.Bold,
+        fontSize = 14.sp,
         lineHeight = 24.sp
     ),
 

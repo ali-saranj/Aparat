@@ -28,10 +28,15 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
 import ali.saranj.aparat.ui.theme.MyApplicationTheme
+import android.view.View
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
+import java.util.Locale
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -43,21 +48,23 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
+
         setContent {
             MyApplicationTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Column {
-                        AparatToolBar()
-                        val navHostController = rememberNavController()
-                        navAction.navHostController = navHostController
-                        MainNavigation(navHostController)
+                CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl ) {
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background
+                    ) {
+                        Column {
+                            AparatToolBar()
+                            val navHostController = rememberNavController()
+                            navAction.navHostController = navHostController
+                            MainNavigation(navHostController)
+                        }
                     }
-
-
                 }
+
             }
         }
     }

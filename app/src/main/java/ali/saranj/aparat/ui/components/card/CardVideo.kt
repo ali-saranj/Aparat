@@ -78,10 +78,11 @@ fun CardVideo(
             verticalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
+                modifier = Modifier.padding(2.dp),
                 text = video.title,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.titleLarge
+                style = MaterialTheme.typography.titleMedium
             )
             Spacer(modifier = Modifier.size(4.dp))
             Row(
@@ -98,8 +99,8 @@ fun CardVideo(
                         .clip(CircleShape),
                     model = video.userImageUrl,
                     contentScale = ContentScale.Crop,
-                    placeholder = painterResource(id = R.drawable.ic_launcher_background),
-                    error = painterResource(id = R.drawable.ic_launcher_background),
+                    placeholder = painterResource(id = R.drawable.profile),
+                    error = null,
                     contentDescription = video.userName
                 )
             }
