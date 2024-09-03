@@ -134,6 +134,9 @@ dependencies {
     //coil
     implementation(libs.coil.compose)
 
+    //navigation
+    implementation (libs.androidx.navigation.compose)
+
     androidTestImplementation(libs.androidx.test.core)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.runner)

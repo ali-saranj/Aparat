@@ -20,4 +20,6 @@ import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class Aparat : Application()
+class Aparat : Application(){
+
+}

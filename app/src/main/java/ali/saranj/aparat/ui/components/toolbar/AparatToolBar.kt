@@ -7,6 +7,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -37,17 +38,19 @@ fun AparatToolBar(
                 modifier = Modifier
             ) {
                 Image(
-                    modifier = Modifier.size(54.dp).padding(bottom = 2.dp),
+                    modifier = Modifier
+                        .size(54.dp)
+                        .padding(bottom = 2.dp),
                     painter = painterResource(id = R.drawable.frame_2),
                     contentScale = ContentScale.FillBounds,
                     contentDescription = "Aparat"
                 )
+                Spacer(modifier = Modifier.size(4.dp))
                 Text(
                     text = stringResource(id = R.string.app_name),
                     style = MaterialTheme.typography.titleLarge
                 )
             }
-
         },
 
         )

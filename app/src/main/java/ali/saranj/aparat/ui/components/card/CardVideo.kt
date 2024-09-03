@@ -2,6 +2,7 @@ package ali.saranj.aparat.ui.components.card
 
 import ali.saranj.aparat.R
 import ali.saranj.aparat.data.models.Video
+import ali.saranj.aparat.ui.navigation.NavigationItem
 import ali.saranj.aparat.ui.theme.MyApplicationTheme
 import ali.saranj.aparat.utils.Time
 import androidx.compose.foundation.background
@@ -30,6 +31,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 
 @Composable
@@ -37,6 +39,7 @@ fun CardVideo(
     modifier: Modifier = Modifier,
     video: Video
 ) {
+
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -60,7 +63,7 @@ fun CardVideo(
                         .align(Alignment.TopStart)
                         .clip(RoundedCornerShape(20.dp))
                         .background(Color(0x88000000))
-                        .padding(4.dp,2.dp),
+                        .padding(4.dp, 2.dp),
                     text = Time().getFormattedTime(video.time ?: 0),
                     style = MaterialTheme.typography.bodySmall,
                     color = Color.White

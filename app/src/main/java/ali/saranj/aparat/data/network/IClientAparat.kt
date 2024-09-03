@@ -24,13 +24,13 @@ interface IClientAparat {
     @GET("etc/api/categoryVideos/cat/{id}/perpage/{page}")
     suspend fun getCategoryVideos(
         @Path("id") id: Int,
-        @Path("page") page: Int
+        @Path("page") size: Int
     ): Response<CategoryVideos>
 
     @GET("/etc/api/videoBySearch/text/{text}/perpage/{page}")
     suspend fun getSearchVideos(
         @Path("text") text: String,
-        @Path("page") page: Int
+        @Path("page") size: Int
     ): Response<VideoBySearch>
 
     @GET("etc/api/video/videohash/{id}")

@@ -23,7 +23,7 @@
     <style name="Theme.SplashScreen.MySplash" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">#FFFFFF</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/frame_2</item>
-        <item name="postSplashScreenTheme">@style/Theme.SplashScreen</item>
+        <item name="postSplashScreenTheme">@style/Theme.Aparat</item>
     </style>
 
 </resources>

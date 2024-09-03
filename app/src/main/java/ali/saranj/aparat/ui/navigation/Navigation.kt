@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ali.saranj.aparat.ui
+package ali.saranj.aparat.ui.navigation
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -24,13 +24,23 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ali.saranj.aparat.ui.dataitemtype.DataItemTypeScreen
+import ali.saranj.aparat.ui.screen.detail.DetailScreen
+import ali.saranj.aparat.ui.screen.main.MainScreen
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 
 @Composable
-fun MainNavigation() {
-    val navController = rememberNavController()
+fun MainNavigation(navController: NavHostController) {
 
-    NavHost(navController = navController, startDestination = "main") {
-        composable("main") { DataItemTypeScreen(modifier = Modifier.padding(16.dp)) }
+    NavHost(navController = navController, startDestination = NavigationItem.Main.route) {
+        composable(NavigationItem.Main.route) {
+            MainScreen(
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+        composable(NavigationItem.DetailVideo.route){
+            DetailScreen()
+        }
         // TODO: Add more destinations
     }
 }

@@ -16,6 +16,9 @@
 
 package ali.saranj.aparat.ui
 
+import ali.saranj.aparat.ui.components.toolbar.AparatToolBar
+import ali.saranj.aparat.ui.navigation.MainNavigation
+import ali.saranj.aparat.ui.navigation.NavAction
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -25,10 +28,17 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
 import ali.saranj.aparat.ui.theme.MyApplicationTheme
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Scaffold
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.compose.rememberNavController
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var navAction: NavAction
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +49,14 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainNavigation()
+                    Column {
+                        AparatToolBar()
+                        val navHostController = rememberNavController()
+                        navAction.navHostController = navHostController
+                        MainNavigation(navHostController)
+                    }
+
+
                 }
             }
         }
