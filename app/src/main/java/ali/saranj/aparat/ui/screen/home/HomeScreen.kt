@@ -38,7 +38,7 @@ fun HomeScreen(
     val homeUIEvent = viewModel::handleEvent
     val videoMostState = viewModel.mostVideosUiState.value
     val categoryState = viewModel.categoriesUiState.value
-    var isVideoLoading by remember {
+    var isMostVideoLoading by remember {
         mutableStateOf(false)
     }
     var mostViewedVideos by remember {
@@ -56,18 +56,18 @@ fun HomeScreen(
 
     when (videoMostState) {
         is UIState.Error -> {
-            isVideoLoading = false
+            isMostVideoLoading = false
             errorMessageMostViewedVideos = videoMostState.exception
         }
 
         is UIState.Loading -> {
-            isVideoLoading = true
+            isMostVideoLoading = true
             mostViewedVideos = emptyList()
             errorMessageMostViewedVideos = ""
         }
 
         is UIState.Success -> {
-            isVideoLoading = false
+            isMostVideoLoading = false
             mostViewedVideos = videoMostState.data
             errorMessageMostViewedVideos = ""
         }
@@ -109,6 +109,19 @@ fun HomeScreen(
     }
 
     Column {
+        if (isMostVideoLoading){
+            CircularProgressIndicator()
+        }else{
+            when{
+                errorMessageMostViewedVideos.isNotEmpty() -> {
+                    Text(text = errorMessageMostViewedVideos)
+                }
+
+                mostViewedVideos.isNotEmpty() ->{
+                    HomePageMostViewVideo(listVideo = mostViewedVideos)
+                }
+            }
+        }
 
     }
 
