@@ -140,7 +140,8 @@ private fun PreviewCardVideo() {
                 tags = "#tag1 #tag2",
                 categoryName = "Category Name",
                 categoryId = 1,
-                time = 12036 // 2 minutes
+                time = 12036,
+                visitCunt = 33
             )
         )
     }
