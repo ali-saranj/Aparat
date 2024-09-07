@@ -58,12 +58,7 @@ fun AppNavHost(
         startDestination = startDestination
     ) {
         composable(BottomNavItem.Home.route) {
-
-            val homeViewMode = hiltViewModel<HomeViewModel>()
-            val stateListVideo = homeViewMode.homeUiState.value
-            HomeScreen(homeUIEvent = homeViewMode::handleEvent, videoState = stateListVideo)
-
-
+            HomeScreen()
         }
         composable(BottomNavItem.Profile.route){
             ProfileScreen()

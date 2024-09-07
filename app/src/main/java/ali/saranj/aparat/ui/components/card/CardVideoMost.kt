@@ -7,6 +7,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -30,22 +32,25 @@ import coil.compose.AsyncImage
 fun CardVideoMost(modifier: Modifier = Modifier, video: Video) {
 
 
-    Card {
+    Card (modifier = modifier){
         Box {
             AsyncImage(
-                modifier = Modifier.size(250.dp, 150.dp),
-                model = video.videoUrl,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp),
+                model = video.thumbnailUrl,
                 contentScale = ContentScale.Crop,
                 placeholder = painterResource(id = R.drawable.ic_launcher_background),
                 error = painterResource(id = R.drawable.ic_launcher_background),
                 contentDescription = video.title
             )
-            Row(modifier = Modifier
-                .align(Alignment.TopStart)
-                .padding(8.dp)
-                .clip(RoundedCornerShape(15.dp))
-                .background(Color(0xFFFF0000))
-                .padding(2.dp),
+            Row(
+                modifier = Modifier
+                    .align(Alignment.TopStart)
+                    .padding(8.dp)
+                    .clip(RoundedCornerShape(15.dp))
+                    .background(Color(0xFFFF0000))
+                    .padding(2.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
