@@ -44,7 +44,7 @@ val Typography = Typography(
         fontFamily = firaSansFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 12.sp,
-        lineHeight = 16.sp
+        lineHeight = 12.sp
     ),
 
     titleLarge = TextStyle(
