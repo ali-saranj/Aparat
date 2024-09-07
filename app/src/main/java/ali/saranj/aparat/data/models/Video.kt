@@ -15,5 +15,6 @@ data class Video(
     var tags:String?,
     val categoryName:String?,
     val categoryId: Int?,
-    val time: Int?
+    val time: Int?,
+    val visitCunt:Int?,
 )

@@ -19,4 +19,5 @@ fun VideoDto.toVideo() = Video(
     categoryName = catName,
     categoryId = catId,
     time = duration,
+    visitCunt = visitCnt
 )
