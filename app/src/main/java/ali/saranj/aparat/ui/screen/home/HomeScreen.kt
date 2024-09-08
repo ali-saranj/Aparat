@@ -68,7 +68,9 @@ fun HomeScreen(
             is UIState.Success -> HomeCategoriesView(
                 modifier = Modifier.padding(top = 8.dp),
                 categories = categoryState.data
-            )
+            ){
+                homeUIEvent.invoke(HomeUiEvent.GoToCategoryDetails(it))
+            }
 
             is UIState.Error -> Text(text = categoryState.exception)
         }
@@ -79,7 +81,7 @@ fun HomeScreen(
 
 
 @Composable
-fun HomeCategoriesView(modifier: Modifier = Modifier, categories: List<Category>) {
+fun HomeCategoriesView(modifier: Modifier = Modifier, categories: List<Category>,onCategoryClick: (Category) -> Unit) {
     Column(modifier = modifier) {
         Text(
             modifier = Modifier.padding(8.dp),
@@ -93,7 +95,7 @@ fun HomeCategoriesView(modifier: Modifier = Modifier, categories: List<Category>
                     category = category,
                     modifier = modifier.padding(4.dp)
                 ) { category ->
-
+                    onCategoryClick(category)
                 }
             }
         }

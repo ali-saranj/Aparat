@@ -57,7 +57,6 @@ class MainActivity : ComponentActivity() {
                         color = MaterialTheme.colorScheme.background
                     ) {
                         Column(modifier = Modifier.fillMaxSize()){
-                            AparatToolBar()
                             val navHostController = rememberNavController()
                             navAction.navHostController = navHostController
                             MainNavigation(navHostController)

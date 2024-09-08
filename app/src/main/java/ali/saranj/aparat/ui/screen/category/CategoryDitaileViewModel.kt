@@ -35,11 +35,9 @@ class CategoryDetailViewModel @Inject constructor(
 
     private fun loadVideoByCategory(categoryId: Int) = viewModelScope.launch {
         categoryDetailState.value = UIState.Loading
-        repository.getVideoByCategory(id = categoryId, 100).collectLatest {
+        repository.getVideoByCategory(id = categoryId, 500).collectLatest {
             when (it) {
-                is Response.Error -> categoryDetailState.value =
-                    UIState.Error(exception = it.exception)
-
+                is Response.Error -> categoryDetailState.value = UIState.Error(exception = it.exception)
                 is Response.Success -> categoryDetailState.value = UIState.Success(data = it.data)
             }
         }

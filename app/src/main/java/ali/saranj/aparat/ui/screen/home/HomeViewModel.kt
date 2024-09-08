@@ -5,6 +5,7 @@ import ali.saranj.aparat.data.models.Video
 import ali.saranj.aparat.data.network.dto.video.mostviewed.MostViewedVideos
 import ali.saranj.aparat.data.repository.category.CategoryRepositoryImpl
 import ali.saranj.aparat.data.repository.video.VideoRepositoryImpl
+import ali.saranj.aparat.ui.navigation.NavAction
 import ali.saranj.aparat.utils.Response
 import ali.saranj.aparat.utils.UIState
 import androidx.compose.runtime.mutableStateOf
@@ -17,8 +18,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    val repositoryVideo: VideoRepositoryImpl,
-    val repositoryCategory: CategoryRepositoryImpl
+    private val repositoryVideo: VideoRepositoryImpl,
+    private val repositoryCategory: CategoryRepositoryImpl,
+    private val navAction: NavAction
 ) : ViewModel() {
 
     var mostVideosUiState = mutableStateOf<UIState<List<Video>>>(UIState.Loading)
@@ -34,7 +36,15 @@ class HomeViewModel @Inject constructor(
             is HomeUiEvent.GetVideosByCategory -> TODO()
             is HomeUiEvent.LoadCategorise -> getCategories()
             is HomeUiEvent.LoadMostVideos -> getMostVideos()
+            is HomeUiEvent.GoToCategoryDetails -> goToCategoryDetails(homeEvent.category)
         }
+    }
+
+    private fun goToCategoryDetails(category: Category) {
+        navAction.navigateToCategoryDetail(
+            categoryId = category.id.toString(),
+            categoryName = category.name
+        )
     }
 
     private fun getCategories() = viewModelScope.launch {

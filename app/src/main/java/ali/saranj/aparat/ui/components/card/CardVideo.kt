@@ -112,7 +112,6 @@ fun CardVideo(
             ) {
                 Text(text = video.mDate ?: "", style = MaterialTheme.typography.bodySmall)
                 Spacer(modifier = Modifier.size(8.dp))
-                Text(text = video.categoryName ?: "", style = MaterialTheme.typography.bodySmall)
             }
         }
     }

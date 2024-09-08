@@ -42,13 +42,18 @@ fun MainNavigation(navController: NavHostController) {
             DetailScreen()
         }
 
-        composable(NavigationItem.CategoryDetail.route + "?categoryId={categoryId}",
-            arguments = listOf(navArgument("categoryId") { type = NavType.StringType })
+        composable(
+            NavigationItem.CategoryDetail.route + "?categoryId={categoryId}&categoryName={categoryName}",
+            arguments = listOf(
+                navArgument("categoryId") { type = NavType.StringType },
+                navArgument("categoryName") { type = NavType.StringType }
+            )
         )
         { backStackEntry ->
             val categoryId = backStackEntry.arguments?.getString("categoryId")
+            val categoryName = backStackEntry.arguments?.getString("categoryName")
 
-            CategoryDetailScreen(categoryId = categoryId)
+            CategoryDetailScreen(categoryId = categoryId, categoryName = categoryName)
         }
 
         // TODO: Add more destinations

@@ -13,8 +13,8 @@ class NavAction {
         navHostController?.navigate(NavigationItem.Main.route)
     }
 
-    fun navigateToCategoryDetail(categoryId: String) {
-        navHostController?.navigate(NavigationItem.CategoryDetail.route + "?categoryId=$categoryId")
+    fun navigateToCategoryDetail(categoryId: String, categoryName: String) {
+        navHostController?.navigate(NavigationItem.CategoryDetail.route + "?categoryId=$categoryId&categoryName=$categoryName")
     }
 
     fun navigateBack() {

@@ -2,6 +2,7 @@ package ali.saranj.aparat.ui.screen.main
 
 import ali.saranj.aparat.R
 import ali.saranj.aparat.ui.components.navbottom.BottomNavigationBar
+import ali.saranj.aparat.ui.components.toolbar.AparatToolBar
 import ali.saranj.aparat.ui.screen.home.HomeScreen
 import ali.saranj.aparat.ui.screen.home.HomeViewModel
 import ali.saranj.aparat.ui.screen.profile.ProfileScreen
@@ -17,8 +18,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
 sealed class BottomNavItem(val route: String, val icon: Int, val label: String) {
-    data object Home : BottomNavItem("home", R.drawable.home, "Home")
-    data object Profile : BottomNavItem("profile", R.drawable.profile, "Profile")
+    data object Home : BottomNavItem("home", R.drawable.home, "صفحه اصلی")
+    data object Profile : BottomNavItem("profile", R.drawable.profile, "پروفایل")
     companion object {
         fun values(): List<BottomNavItem> {
             return listOf(
@@ -37,6 +38,7 @@ fun MainScreen(
 ) {
     var navController = rememberNavController()
     Scaffold(
+        topBar = { AparatToolBar() },
         bottomBar = { BottomNavigationBar(navController) })
     { paddingValues ->
         AppNavHost(

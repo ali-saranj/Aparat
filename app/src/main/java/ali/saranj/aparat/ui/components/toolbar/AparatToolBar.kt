@@ -33,7 +33,6 @@ fun AparatToolBar(
 ) {
     TopAppBar(
         modifier = modifier,
-        colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0x34EA1D5D)),
         title = {
             Row(
                 horizontalArrangement = Arrangement.Center,
