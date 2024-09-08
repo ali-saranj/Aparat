@@ -50,7 +50,7 @@ fun CardVideoMost(modifier: Modifier = Modifier, video: Video) {
                     .padding(8.dp)
                     .clip(RoundedCornerShape(15.dp))
                     .background(Color(0xFFFF0000))
-                    .padding(2.dp),
+                    .padding(4.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
@@ -61,7 +61,7 @@ fun CardVideoMost(modifier: Modifier = Modifier, video: Video) {
                 )
                 Spacer(modifier = Modifier.size(4.dp))
                 Icon(
-                    modifier = Modifier.size(16.dp),
+                    modifier = Modifier.size(20.dp),
                     painter = painterResource(id = R.drawable.ic_eye_24),
                     contentDescription = "eye",
                     tint = Color.White

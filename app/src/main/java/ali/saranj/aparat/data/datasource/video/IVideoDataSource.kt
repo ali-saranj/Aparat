@@ -7,7 +7,7 @@ interface IVideoDataSource {
 
     suspend fun getMostViewedVideos(): Response<List<Video>>
 
-    suspend fun getCategoryVideos(id: Int, page: Int): Response<List<Video>>
+    suspend fun getVideoByCategory(id: Int, page: Int): Response<List<Video>>
 
     suspend fun getVideoDetails(id: String): Response<Video>
 

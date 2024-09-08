@@ -40,7 +40,7 @@ fun MainScreen(
         bottomBar = { BottomNavigationBar(navController) })
     { paddingValues ->
         AppNavHost(
-            modifier = modifier.padding(paddingValues),
+            modifier = Modifier.padding(paddingValues = paddingValues),
             navController = navController
         )
     }
@@ -60,7 +60,7 @@ fun AppNavHost(
         composable(BottomNavItem.Home.route) {
             HomeScreen()
         }
-        composable(BottomNavItem.Profile.route){
+        composable(BottomNavItem.Profile.route) {
             ProfileScreen()
         }
 

@@ -22,12 +22,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import ali.saranj.aparat.ui.dataitemtype.DataItemTypeScreen
+import ali.saranj.aparat.ui.screen.category.CategoryDetailScreen
 import ali.saranj.aparat.ui.screen.detail.DetailScreen
 import ali.saranj.aparat.ui.screen.main.MainScreen
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 
 @Composable
 fun MainNavigation(navController: NavHostController) {
@@ -38,9 +38,19 @@ fun MainNavigation(navController: NavHostController) {
                 modifier = Modifier.padding(16.dp)
             )
         }
-        composable(NavigationItem.DetailVideo.route){
+        composable(NavigationItem.DetailVideo.route) {
             DetailScreen()
         }
+
+        composable(NavigationItem.CategoryDetail.route + "?categoryId={categoryId}",
+            arguments = listOf(navArgument("categoryId") { type = NavType.StringType })
+        )
+        { backStackEntry ->
+            val categoryId = backStackEntry.arguments?.getString("categoryId")
+
+            CategoryDetailScreen(categoryId = categoryId)
+        }
+
         // TODO: Add more destinations
     }
 }

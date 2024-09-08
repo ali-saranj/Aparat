@@ -22,7 +22,7 @@ interface IClientAparat {
 
 
     @GET("etc/api/categoryVideos/cat/{id}/perpage/{page}")
-    suspend fun getCategoryVideos(
+    suspend fun getVideoByCategory(
         @Path("id") id: Int,
         @Path("page") size: Int
     ): Response<CategoryVideos>
@@ -46,9 +46,9 @@ suspend fun main() {
 
     val service = retrofit.create(IClientAparat::class.java)
 
-    if (service.getVideoDetails("c457emw").isSuccessful) {
-        println(service.getVideoDetails("c457emw").body()!!)
+    if (service.getVideoByCategory(8,100).isSuccessful) {
+        println(service.getVideoByCategory(8,100).body()!!)
     } else {
-        println("Error: ${service.getCategories().code()}")
+        println("Error: ${service.getVideoByCategory(8,100).code()}")
     }
 }

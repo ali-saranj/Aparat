@@ -23,9 +23,9 @@ class IVideoDataSourceImpl @Inject constructor(private val aparatApi: IClientApa
 
     }
 
-    override suspend fun getCategoryVideos(id: Int, page: Int): Response<List<Video>> {
+    override suspend fun getVideoByCategory(id: Int, page: Int): Response<List<Video>> {
         return try {
-            val response = aparatApi.getCategoryVideos(id, page)
+            val response = aparatApi.getVideoByCategory(id, page)
 
             if (response.isSuccessful) {
                 Response.Success(response.body()!!.categoryvideos!!.map { it.toVideo() })

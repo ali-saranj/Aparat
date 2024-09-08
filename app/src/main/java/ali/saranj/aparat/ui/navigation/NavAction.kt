@@ -12,4 +12,12 @@ class NavAction {
     fun navigateToMain() {
         navHostController?.navigate(NavigationItem.Main.route)
     }
+
+    fun navigateToCategoryDetail(categoryId: String) {
+        navHostController?.navigate(NavigationItem.CategoryDetail.route + "?categoryId=$categoryId")
+    }
+
+    fun navigateBack() {
+        navHostController?.popBackStack()
+    }
 }

@@ -2,6 +2,7 @@ package ali.saranj.aparat.ui.screen.home
 
 import ali.saranj.aparat.data.models.Category
 import ali.saranj.aparat.data.models.Video
+import ali.saranj.aparat.ui.components.button.ButtonCategory
 import ali.saranj.aparat.ui.components.card.CardCategory
 import ali.saranj.aparat.ui.components.card.CardVideo
 import ali.saranj.aparat.ui.components.card.CardVideoMost
@@ -10,13 +11,17 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -38,108 +43,62 @@ fun HomeScreen(
     val homeUIEvent = viewModel::handleEvent
     val videoMostState = viewModel.mostVideosUiState.value
     val categoryState = viewModel.categoriesUiState.value
-    var isMostVideoLoading by remember {
-        mutableStateOf(false)
-    }
-    var mostViewedVideos by remember {
-        mutableStateOf(listOf<Video>())
-    }
-    var errorMessageMostViewedVideos by remember {
-        mutableStateOf("")
-    }
 
 
     LaunchedEffect(homeUIEvent) {
         homeUIEvent.invoke(HomeUiEvent.LoadMostVideos)
         homeUIEvent.invoke(HomeUiEvent.LoadCategorise)
-    }
-
-    when (videoMostState) {
-        is UIState.Error -> {
-            isMostVideoLoading = false
-            errorMessageMostViewedVideos = videoMostState.exception
-        }
-
-        is UIState.Loading -> {
-            isMostVideoLoading = true
-            mostViewedVideos = emptyList()
-            errorMessageMostViewedVideos = ""
-        }
-
-        is UIState.Success -> {
-            isMostVideoLoading = false
-            mostViewedVideos = videoMostState.data
-            errorMessageMostViewedVideos = ""
-        }
 
     }
 
-    var isCategoryLoading by remember {
-        mutableStateOf(false)
-    }
-    var categories by remember {
-        mutableStateOf(listOf<Category>())
-    }
-    var errorMessageCategories by remember {
-        mutableStateOf("")
-    }
 
-    when (categoryState) {
-        is UIState.Error -> {
-            isCategoryLoading = false
-            errorMessageCategories = categoryState.exception
+    Column(Modifier.fillMaxSize()) {
+        when (videoMostState) {
+            is UIState.Loading -> CircularProgressIndicator()
+            is UIState.Success -> HomePageMostViewVideo(
+                modifier = Modifier.padding(top = 8.dp),
+                listVideo = videoMostState.data
+            )
+
+            is UIState.Error -> Text(text = videoMostState.exception)
         }
 
-        is UIState.Loading -> {
-            isCategoryLoading = true
-            errorMessageCategories = ""
-            categories = emptyList()
-        }
+        when (categoryState) {
+            is UIState.Loading -> CircularProgressIndicator()
+            is UIState.Success -> HomeCategoriesView(
+                modifier = Modifier.padding(top = 8.dp),
+                categories = categoryState.data
+            )
 
-        is UIState.Success -> {
-            isCategoryLoading = false
-            errorMessageCategories = ""
-            categories = categoryState.data
+            is UIState.Error -> Text(text = categoryState.exception)
         }
     }
 
-    LaunchedEffect(homeUIEvent) {
-        homeUIEvent.invoke(HomeUiEvent.LoadMostVideos)
-        homeUIEvent.invoke(HomeUiEvent.LoadCategorise)
-    }
-
-    Column {
-        if (isMostVideoLoading){
-            CircularProgressIndicator()
-        }else{
-            when{
-                errorMessageMostViewedVideos.isNotEmpty() -> {
-                    Text(text = errorMessageMostViewedVideos)
-                }
-
-                mostViewedVideos.isNotEmpty() ->{
-                    HomePageMostViewVideo(listVideo = mostViewedVideos)
-                }
-            }
-        }
-
-    }
 
 }
 
 
 @Composable
 fun HomeCategoriesView(modifier: Modifier = Modifier, categories: List<Category>) {
-    LazyRow {
-        items(categories) { category ->
-            CardCategory(
-                category = category,
-                modifier = modifier.padding(4.dp)
-            ) {
+    Column(modifier = modifier) {
+        Text(
+            modifier = Modifier.padding(8.dp),
+            text = "لیست دسته بندی ها",
+            style = MaterialTheme.typography.titleMedium
+        )
+        LazyRow {
+            items(categories) { category ->
+                Spacer(modifier = Modifier.size(4.dp))
+                ButtonCategory(
+                    category = category,
+                    modifier = modifier.padding(4.dp)
+                ) { category ->
 
+                }
             }
         }
     }
+
 }
 
 @Composable
@@ -158,15 +117,22 @@ fun HomePageMostViewVideo(modifier: Modifier = Modifier, listVideo: List<Video>)
         listVideo.size
     }
 
-
-    HorizontalPager(
-        state = pagerState,
-        contentPadding = PaddingValues(horizontal = 24.dp)
-    ) { page: Int ->
-        CardVideoMost(modifier = Modifier.padding(4.dp), video = listVideo[page])
+    Column(modifier = modifier) {
+        Text(
+            modifier = Modifier.padding(8.dp),
+            text = " ویدیو های پر بازدید ",
+            style = MaterialTheme.typography.titleMedium
+        )
+        HorizontalPager(
+            state = pagerState,
+            contentPadding = PaddingValues(horizontal = 24.dp)
+        ) { page: Int ->
+            CardVideoMost(modifier = Modifier.padding(4.dp), video = listVideo[page])
+        }
     }
 
-    LaunchedEffect(Unit) {
+
+    LaunchedEffect("") {
         while (true) {
             delay(3000)
             pagerState.animateScrollToPage((pagerState.currentPage + 1) % listVideo.size)

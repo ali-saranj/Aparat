@@ -19,8 +19,8 @@ class VideoRepositoryImpl @Inject constructor(private var dataSourceImpl: IVideo
         }
     }.flowOn(Dispatchers.IO)
 
-    override suspend fun getCategoryVideos(id: Int, page: Int): Flow<Response<List<Video>>> = flow {
-        when (val response = dataSourceImpl.getCategoryVideos(id, page)) {
+    override suspend fun getVideoByCategory(id: Int, page: Int): Flow<Response<List<Video>>> = flow {
+        when (val response = dataSourceImpl.getVideoByCategory(id, page)) {
             is Response.Success -> emit(Response.Success(response.data))
             is Response.Error -> emit(Response.Error(response.exception))
         }
