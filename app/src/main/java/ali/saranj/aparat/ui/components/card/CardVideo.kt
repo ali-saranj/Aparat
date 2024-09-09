@@ -33,6 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
+import com.valentinilk.shimmer.shimmer
 
 @Composable
 fun CardVideo(
@@ -48,7 +49,7 @@ fun CardVideo(
         horizontalArrangement = Arrangement.Start
     ) {
         Card {
-            Box {
+            Box(modifier) {
                 AsyncImage(
                     modifier = Modifier.size(150.dp, 100.dp),
                     model = video.thumbnailUrl,
@@ -117,6 +118,72 @@ fun CardVideo(
     }
 }
 
+@Composable
+fun CardVideoWithShimmer(
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(100.dp)
+            .padding(8.dp)
+            .shimmer()
+    ) {
+        Box(
+            modifier = Modifier
+                .size(150.dp, 100.dp)
+                .clip(RoundedCornerShape(10.dp))
+                .background(Color.Gray)
+                .shimmer(),
+        )
+        Spacer(modifier = Modifier.size(8.dp))
+        Column(
+            modifier = Modifier.fillMaxHeight(),
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(34.dp, 24.dp)
+                    .background(Color.Gray)
+                    .shimmer(),
+            )
+            Spacer(modifier = Modifier.size(4.dp))
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(34.dp, 24.dp)
+                        .background(Color.Gray),
+                )
+                Spacer(modifier = Modifier.size(8.dp))
+
+            }
+
+            Spacer(modifier = Modifier.size(4.dp))
+            Row(
+                horizontalArrangement = Arrangement.Start,
+                modifier = Modifier
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(34.dp, 24.dp)
+                        .background(Color.Gray),
+                )
+                Spacer(modifier = Modifier.size(8.dp))
+            }
+        }
+
+    }
+}
+
+@Preview(name = "CardVideoWithShimmer", showBackground = true)
+@Composable
+private fun PreviewCardVideoWithShimmer() {
+    CardVideoWithShimmer()
+}
 
 @Preview(name = "CardVideo", showBackground = true)
 @Composable

@@ -7,6 +7,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Info
@@ -26,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.valentinilk.shimmer.shimmer
 
 @Composable
 fun CardCategory(
@@ -57,10 +59,33 @@ fun CardCategory(
 }
 
 
+@Composable
+fun CardCategoryWithShimmer(
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = Modifier
+            .shimmer()
+            .clip(RoundedCornerShape(300.dp))
+            .size(width = 80.dp, height = 40.dp)
+            .background(Color.Gray)
+
+    ) {
+
+    }
+}
+
+@Preview(name = "CardCategoryWithShimmer")
+@Composable
+private fun PreviewCardCategoryWithShimmer() {
+    CardCategoryWithShimmer()
+}
+
 @Preview(name = "CardCategory")
 @Composable
 private fun PreviewCardCategory() {
     CardCategory(category = Category("", "test", "")) { isCheck, category ->
 
     }
+
 }

@@ -4,8 +4,10 @@ import ali.saranj.aparat.data.models.Category
 import ali.saranj.aparat.data.models.Video
 import ali.saranj.aparat.ui.components.button.ButtonCategory
 import ali.saranj.aparat.ui.components.card.CardCategory
+import ali.saranj.aparat.ui.components.card.CardCategoryWithShimmer
 import ali.saranj.aparat.ui.components.card.CardVideo
 import ali.saranj.aparat.ui.components.card.CardVideoMost
+import ali.saranj.aparat.ui.components.card.CardVideoMostWithShimmer
 import ali.saranj.aparat.utils.UIState
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
@@ -54,7 +56,7 @@ fun HomeScreen(
 
     Column(Modifier.fillMaxSize()) {
         when (videoMostState) {
-            is UIState.Loading -> CircularProgressIndicator()
+            is UIState.Loading -> HomePageMostViewVideo()
             is UIState.Success -> HomePageMostViewVideo(
                 modifier = Modifier.padding(top = 8.dp),
                 listVideo = videoMostState.data
@@ -64,7 +66,7 @@ fun HomeScreen(
         }
 
         when (categoryState) {
-            is UIState.Loading -> CircularProgressIndicator()
+            is UIState.Loading -> HomeCategoriesView()
             is UIState.Success -> HomeCategoriesView(
                 modifier = Modifier.padding(top = 8.dp),
                 categories = categoryState.data
@@ -97,6 +99,24 @@ fun HomeCategoriesView(modifier: Modifier = Modifier, categories: List<Category>
                 ) { category ->
                     onCategoryClick(category)
                 }
+            }
+        }
+    }
+
+}
+
+@Composable
+fun HomeCategoriesView(modifier: Modifier = Modifier) {
+    Column(modifier = modifier) {
+        Text(
+            modifier = Modifier.padding(8.dp),
+            text = "لیست دسته بندی ها",
+            style = MaterialTheme.typography.titleMedium
+        )
+        LazyRow {
+            items(20) {
+                Spacer(modifier = Modifier.size(4.dp))
+                CardCategoryWithShimmer()
             }
         }
     }
@@ -141,6 +161,29 @@ fun HomePageMostViewVideo(modifier: Modifier = Modifier, listVideo: List<Video>)
         }
 
     }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun HomePageMostViewVideo(modifier: Modifier = Modifier) {
+    val pagerState = rememberPagerState {
+        10
+    }
+
+    Column(modifier = modifier) {
+        Text(
+            modifier = Modifier.padding(8.dp),
+            text = " ویدیو های پر بازدید ",
+            style = MaterialTheme.typography.titleMedium
+        )
+        HorizontalPager(
+            state = pagerState,
+            contentPadding = PaddingValues(horizontal = 24.dp)
+        ) { page: Int ->
+            CardVideoMostWithShimmer()
+        }
+    }
+
 }
 
 

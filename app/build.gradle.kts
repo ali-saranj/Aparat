@@ -137,6 +137,9 @@ dependencies {
     //navigation
     implementation (libs.androidx.navigation.compose)
 
+    //skeleton
+    implementation(libs.compose.shimmer)
+
     androidTestImplementation(libs.androidx.test.core)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.runner)

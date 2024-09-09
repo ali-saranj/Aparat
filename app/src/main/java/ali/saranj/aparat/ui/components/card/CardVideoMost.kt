@@ -27,12 +27,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.valentinilk.shimmer.shimmer
 
 @Composable
 fun CardVideoMost(modifier: Modifier = Modifier, video: Video) {
 
 
-    Card (modifier = modifier){
+    Card(modifier = modifier) {
         Box {
             AsyncImage(
                 modifier = Modifier
@@ -81,6 +82,27 @@ fun CardVideoMost(modifier: Modifier = Modifier, video: Video) {
         }
 
     }
+}
+
+@Composable
+fun CardVideoMostWithShimmer() {
+    Box(
+        modifier = Modifier
+            .padding(8.dp)
+            .shimmer()
+            .fillMaxWidth()
+            .height(200.dp)
+            .clip(RoundedCornerShape(30.dp))
+            .background(Color.Gray)
+    ) {
+
+    }
+}
+
+@Preview
+@Composable
+private fun CardVideoMostWithShimmerPreview() {
+    CardVideoMostWithShimmer()
 }
 
 @Preview
