@@ -2,6 +2,7 @@ package ali.saranj.aparat.ui.screen.category
 
 import ali.saranj.aparat.data.models.Video
 import ali.saranj.aparat.ui.components.card.CardVideo
+import ali.saranj.aparat.ui.components.card.CardVideoWithShimmer
 import ali.saranj.aparat.utils.UIState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -56,15 +57,20 @@ fun CategoryDetailScreen(
                 Text(text = state.exception)
             }
 
-            is UIState.Loading -> Box(
-                modifier = Modifier.padding(paddingValues),
-            ) {
-                CircularProgressIndicator()
-            }
+            is UIState.Loading -> CategoryDetailContent(modifier = modifier.padding(paddingValues))
             is UIState.Success -> CategoryDetailContent(
                 modifier = modifier.padding(paddingValues),
                 listVideo = state.data
             )
+        }
+    }
+}
+
+@Composable
+fun CategoryDetailContent(modifier: Modifier = Modifier) {
+    LazyColumn(modifier = modifier) {
+        items(10) {
+            CardVideoWithShimmer()
         }
     }
 }

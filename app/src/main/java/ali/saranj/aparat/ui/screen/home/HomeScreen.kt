@@ -47,7 +47,7 @@ fun HomeScreen(
     val categoryState = viewModel.categoriesUiState.value
 
 
-    LaunchedEffect(homeUIEvent) {
+    LaunchedEffect(viewModel) {
         homeUIEvent.invoke(HomeUiEvent.LoadMostVideos)
         homeUIEvent.invoke(HomeUiEvent.LoadCategorise)
 

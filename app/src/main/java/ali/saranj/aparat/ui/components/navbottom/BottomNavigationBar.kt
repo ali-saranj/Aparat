@@ -46,7 +46,7 @@ fun BottomNavigationBar(navController: NavController) {
                 label = {
                     Text(
                         text = item.label,
-                        style = MaterialTheme.typography.titleSmall,
+                        style = MaterialTheme.typography.bodyMedium,
                         color = if (currentRoute == item.route) Color(0xffea1d5d) else Color.Black
                     )
                 }

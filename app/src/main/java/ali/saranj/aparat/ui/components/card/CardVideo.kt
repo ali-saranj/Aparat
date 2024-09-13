@@ -5,6 +5,7 @@ import ali.saranj.aparat.data.models.Video
 import ali.saranj.aparat.ui.navigation.NavigationItem
 import ali.saranj.aparat.ui.theme.MyApplicationTheme
 import ali.saranj.aparat.utils.Time
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -41,80 +42,66 @@ fun CardVideo(
     video: Video
 ) {
 
-    Row(
+    Column(
         modifier = modifier
-            .fillMaxWidth()
-            .height(100.dp)
-            .padding(8.dp),
-        horizontalArrangement = Arrangement.Start
+            .fillMaxWidth(),
     ) {
-        Card {
-            Box(modifier) {
-                AsyncImage(
-                    modifier = Modifier.size(150.dp, 100.dp),
-                    model = video.thumbnailUrl,
-                    contentScale = ContentScale.Crop,
-                    placeholder = painterResource(id = R.drawable.ic_launcher_background),
-                    error = painterResource(id = R.drawable.ic_launcher_background),
-                    contentDescription = video.title
-                )
-                Text(
-                    modifier = Modifier
-                        .padding(4.dp)
-                        .align(Alignment.TopStart)
-                        .clip(RoundedCornerShape(20.dp))
-                        .background(Color(0x88000000))
-                        .padding(4.dp, 2.dp),
-                    text = Time().getFormattedTime(video.time ?: 0),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = Color.White
+        Box(modifier) {
 
-                )
-            }
-
-        }
-        Spacer(modifier = Modifier.size(10.dp))
-        Column(
-            modifier = Modifier.fillMaxHeight(),
-            verticalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(
-                modifier = Modifier.padding(2.dp),
-                text = video.title,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.titleMedium
+            AsyncImage(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(210.dp),
+                model = video.thumbnailUrl,
+                contentScale = ContentScale.Crop,
+                placeholder = painterResource(id = R.drawable.frame_2),
+                error = painterResource(id = R.drawable.ic_launcher_background),
+                contentDescription = video.title
             )
-            Spacer(modifier = Modifier.size(4.dp))
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically,
+            Text(
                 modifier = Modifier
-            ) {
-                Text(text = video.userName ?: "", style = MaterialTheme.typography.bodyMedium)
-                Spacer(modifier = Modifier.size(8.dp))
-
-                AsyncImage(
-                    modifier = Modifier
-                        .size(24.dp, 24.dp)
-                        .clip(CircleShape),
-                    model = video.userImageUrl,
-                    contentScale = ContentScale.Crop,
-                    placeholder = painterResource(id = R.drawable.profile),
-                    error = null,
-                    contentDescription = video.userName
-                )
-            }
-
-            Spacer(modifier = Modifier.size(4.dp))
-            Row(
-                horizontalArrangement = Arrangement.Start,
-                modifier = Modifier
-            ) {
-                Text(text = video.mDate ?: "", style = MaterialTheme.typography.bodySmall)
-                Spacer(modifier = Modifier.size(8.dp))
-            }
+                    .padding(8.dp)
+                    .align(Alignment.BottomStart)
+                    .clip(RoundedCornerShape(20.dp))
+                    .background(Color(0x88000000))
+                    .padding(4.dp, 2.dp),
+                text = Time().getFormattedTime(video.time ?: 0),
+                style = MaterialTheme.typography.bodySmall,
+                color = Color.White
+            )
         }
+
+        Spacer(modifier = Modifier.size(8.dp))
+        Text(
+            modifier = Modifier.padding(8.dp, 2.dp),
+            text = video.title,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            style = MaterialTheme.typography.titleMedium
+        )
+        Row(
+            horizontalArrangement = Arrangement.End,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp, 1.dp)
+        ) {
+            Text(text = video.pDate ?: "", style = MaterialTheme.typography.bodySmall)
+            Spacer(modifier = Modifier.size(8.dp))
+            Text(
+                text = "بازدید ${video.visitCunt.toString()}" ?: "",
+                style = MaterialTheme.typography.bodySmall
+            )
+        }
+        Spacer(modifier = Modifier.size(12.dp))
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp, 1.dp)
+                .height(1.dp)
+                .background(color = Color(0xFFE0E0E0))
+        )
+        Spacer(modifier = Modifier.size(12.dp))
+
     }
 }
 
@@ -122,59 +109,57 @@ fun CardVideo(
 fun CardVideoWithShimmer(
     modifier: Modifier = Modifier
 ) {
-    Row(
+    Column(
         modifier = modifier
-            .fillMaxWidth()
-            .height(100.dp)
-            .padding(8.dp)
-            .shimmer()
+            .fillMaxWidth(),
     ) {
         Box(
             modifier = Modifier
-                .size(150.dp, 100.dp)
-                .clip(RoundedCornerShape(10.dp))
+                .fillMaxWidth()
+                .height(210.dp)
+                .shimmer()
                 .background(Color.Gray)
-                .shimmer(),
         )
+
         Spacer(modifier = Modifier.size(8.dp))
-        Column(
-            modifier = Modifier.fillMaxHeight(),
-            verticalArrangement = Arrangement.SpaceBetween
+        Box(
+            modifier = Modifier
+                .clip(CircleShape)
+                .size(200.dp, 20.dp)
+                .shimmer()
+                .background(Color.Gray)
+        )
+        Row(
+            horizontalArrangement = Arrangement.End,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp, 1.dp)
         ) {
             Box(
                 modifier = Modifier
-                    .size(34.dp, 24.dp)
-                    .background(Color.Gray)
-                    .shimmer(),
+                    .clip(CircleShape)
+                    .size(80.dp, 20.dp)
+                    .shimmer()
+                    .background(Color.Gray),
             )
-            Spacer(modifier = Modifier.size(4.dp))
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically,
+            Spacer(modifier = Modifier.size(8.dp))
+            Box(
                 modifier = Modifier
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(34.dp, 24.dp)
-                        .background(Color.Gray),
-                )
-                Spacer(modifier = Modifier.size(8.dp))
-
-            }
-
-            Spacer(modifier = Modifier.size(4.dp))
-            Row(
-                horizontalArrangement = Arrangement.Start,
-                modifier = Modifier
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(34.dp, 24.dp)
-                        .background(Color.Gray),
-                )
-                Spacer(modifier = Modifier.size(8.dp))
-            }
+                    .clip(CircleShape)
+                    .size(40.dp, 20.dp)
+                    .shimmer()
+                    .background(Color.Gray),
+            )
         }
+        Spacer(modifier = Modifier.size(12.dp))
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp, 1.dp)
+                .height(1.dp)
+                .background(color = Color(0xFFE0E0E0))
+        )
+        Spacer(modifier = Modifier.size(12.dp))
 
     }
 }
